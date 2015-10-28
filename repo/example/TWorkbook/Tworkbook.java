@@ -10,24 +10,42 @@ package TWorkbook;
  * @author Administrator
  */
 
-import test.*;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
-import jxl.*;
+import jxl.Workbook;
+import jxl.Sheet;
+import jxl.Cell;
+import jxl.Range;
+import jxl.read.biff.BiffException;
 
 public class Tworkbook {
     public static void main(String args[]) {
         try {
-            Workbook wb = Workbook.getWorkbook(new File("D://JEtest/测试.xls"));
-            
-            //判断表是否受到保护
+            File file = new File("D://JEtest/测试.xls");
+            System.out.println("111");
+            Workbook wb = Workbook.getWorkbook(file);
+            System.out.println("111");
+            //判断表是否受到保护   ?????文件加密进行getWorkbook() 时会抛出异常？？？？？？？？？？？？
             System.out.println("Is the sheet protect?   result: " + wb.isProtected());
             
-            //System.out.println("getRangeNames: " + Arrays.toString(wb.getRangeNames()));      //不知道什么用
-            //System.out.println("the name range: " + wb.findByName("7699a589").toString());   //不知道什么用
+            //在Excel表中可以选定多个单元格，给他们起一个名字，这里的range就代表的是一个你选定命名的那些单元格。
+            //！！！！！！！！！！！！！！！！
+            //注意不要用wps 操作选定一部分单元格给其命名，这样jxl用该函数会出现错误，返回的结果不正确。
+            //！！！！！！！！！！！！！！！！
+            //该方法返回所有你命名range的名字的字符串数组
+            String [] rangeNameList = wb.getRangeNames();
+            System.out.println("the range[]: " + Arrays.toString(rangeNameList));
+            
+            //有参数名，得到range[] 数组。    ？？？？range的名字是唯一的，为什么返回是数组呢？？？？
+            Range[]  ranges;
+            ranges = wb.findByName("name");
+            System.out.println("the ranges[] length: " + ranges.length);   
+                       
             
             //获取指定单元格， 参数格式为"sheet1!A1"
-            Cell cellA1 = wb.getCell("第一页!A1");
+            System.out.println("111");
+            Cell cellA1 = wb.getCell("第一页!A3");
             System.out.println("第一页里A1的内容： " + cellA1.getContents());
             
             //返回工作簿中工作表个数
@@ -42,7 +60,9 @@ public class Tworkbook {
             Sheet sheet1 = wb.getSheet("第一页");
             
             //得到工作表数组
-            Sheet [] sheetlist = wb.getSheets();
+            Sheet [] sheetlist;
+            sheetlist = wb.getSheets();
+            System.out.println("工作表个数为： " + sheetlist.length);
             
             //得到工作簿中所有的工作表名称，以字符串数组存储。
             String [] sheetnamelist = wb.getSheetNames();
@@ -54,7 +74,7 @@ public class Tworkbook {
             
             wb.close();
             
-        }catch (Exception e) {
+        }catch (IOException | BiffException | IndexOutOfBoundsException e) {
             System.out.println("Exception: " + e);
         }
     }

@@ -50,6 +50,7 @@ public class Tcreateworkbook {
                 
                 //ws 没有设置相关的属性
                 WorkbookSettings ws = new WorkbookSettings();
+               
                 WritableWorkbook wb2 = Workbook.createWorkbook(file2, ws);
                 WritableSheet wsheet2 = wb2.createSheet("sheet2", 0);
                 System.out.println("sheet2 numbers: " + wb2.getNumberOfSheets());
@@ -83,7 +84,7 @@ public class Tcreateworkbook {
             }
             else {
                 //有问题？？？？？？？？？？？？？？？？？？？？？？？
-                /*
+                ///*
                 //如果文件存在
                 OutputStream os = new FileOutputStream("D://JEtest/test.xls");
                 System.out.println("222222222222 " );
@@ -102,7 +103,7 @@ public class Tcreateworkbook {
                  //System.out.println("33333333ss333 " );
                 //os.write(1);
                 os.close();
-                */
+                //*/
             }
             //System.out.println("33333333ss333 " );
             

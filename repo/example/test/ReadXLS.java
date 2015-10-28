@@ -6,8 +6,12 @@
 package test;
 
 
-import java.io.*;
-import jxl.*;
+import java.io.File;
+import java.io.IOException;
+import jxl.Workbook;
+import jxl.Sheet;
+import jxl.Cell;
+import jxl.read.biff.BiffException;
 
 /**
  *
@@ -20,10 +24,11 @@ public class ReadXLS {
             Sheet sheet = book.getSheet(0);
             Cell cell1 = sheet.getCell(0, 0);
             String result = cell1.getContents();
+            //book.
             
             System.out.println(result);
             book.close();
-        }catch(Exception e) {
+        }catch(IOException | BiffException | IndexOutOfBoundsException e) {
             System.out.println(e);
         }
     }

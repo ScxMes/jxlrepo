@@ -28,8 +28,10 @@ public class TSheet {
             Cell cell = sheet.getCell(0, 0);
             System.out.println("cell(0,0): " + cell.getContents());
             
-            //返回指定位置的单元格，例如：“A4”。注意,这个方法与调用getCell(CellReferenceHelper.getColumn(loc),CellReferenceHelper.getRow(loc))是相同的，
+            //返回指定位置的单元格，例如：“A4”。注意,这个方法与调用
+            //getCell(CellReferenceHelper.getColumn(loc),CellReferenceHelper.getRow(loc))是相同的，
             //其隐含的性能开销为字符串解析。因此,这种方法应该谨慎使用。
+            Cell cellh = sheet.getCell(CellReferenceHelper.getColumn("B1"),CellReferenceHelper.getRow("B1"));
             Cell cell2 = sheet.getCell("B1");      //索引从1开始
             System.out.println("cell(1,0): " + cell2.getContents());
             
@@ -115,6 +117,7 @@ public class TSheet {
             
             //得到指定行格式
             CellView cellViewRow = sheet.getRowView(0);
+            cellViewRow.setHidden(true);
             
             //得到工作表中图像数
             int numberOfImages = sheet.getNumberOfImages();

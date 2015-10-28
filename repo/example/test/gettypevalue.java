@@ -19,7 +19,7 @@ public class gettypevalue {
         try {
             Workbook book = Workbook.getWorkbook(new File("D://JEtest/测试.xls"));
             Sheet sheet = book.getSheet(0);
-            Cell cell1 = sheet.getCell(0, 0);
+            Cell cell1 = sheet.getCell(1, 3);
             System.out.println(cell1.getType());
             String Labelcell1 = "";
             if (cell1.getType() == CellType.STRING_FORMULA) {
